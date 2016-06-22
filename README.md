@@ -12,5 +12,9 @@ Readme
 ---------
 
     ./run.py
-    http://localhost:5000
 
+    访问：http://localhost:5000
+
+截图
+---------
+![alt tag](https://raw.githubusercontent.com/anjkz/monsec/master/img.png)
