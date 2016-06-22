@@ -1,0 +1,38 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{title}}</h1>
+<form action="" method="post" name="vul">
+    {{form.hidden_tag()}}
+    <p>
+        漏洞名称:<br>
+        {{form.name(size=30)}}
+        {% for error in form.errors.name %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+    </p>
+    <p>
+        漏洞等级:<br>
+        {{form.level()}}
+        {% for error in form.errors.level %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+    </p>
+    <p>
+        漏洞类型:<br>
+        {{form.type()}}
+        {% for error in form.errors.type %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+    </p>
+    <p>
+        发现时间:<br>
+        {{form.time()}}
+        {% for error in form.errors.time %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+    </p>
+    <p><input type="submit" value="添加漏洞"></p>
+</form>
+{% endblock %}

@@ -1,0 +1,27 @@
+<html>
+  <head>
+    {% if title %}
+    <title>{{title}} - 安全月报</title>
+    {% else %}
+    <title>安全月报</title>
+    {% endif %}
+  </head>
+  <body>
+    <div>安全月报: 
+         <a href="/index">首页</a>
+         <a href="/setting">设置</a>
+         <a href="/history">历史报表</a>
+    </div>
+    <hr>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+    {% for message in messages %}
+        <li>{{ message }} </li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </body>
+</html>

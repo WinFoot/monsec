@@ -1,0 +1,24 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{title}}</h1>
+<form action="" method="post" name="sheet">
+    {{form.hidden_tag()}}
+    <p>
+        月报名称:<br>
+        {{form.name(size=30)}}
+        {% for error in form.errors.name %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+    </p>
+    <p>
+        风险等级:<br>
+        {{form.level()}}
+        {% for error in form.errors.level %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+    </p>
+    <p><input type="submit" value="新建月报"></p>
+</form>
+{% endblock %}

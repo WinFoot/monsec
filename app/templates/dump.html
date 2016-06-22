@@ -1,0 +1,30 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Hi, {{user.nickname}}!</h1>
+
+<h3>Sheet:</h3>
+{% for sheet in sheets %}
+<p>
+  {{sheet.name}} type: <b>{{sheet.level}}</b>
+</p>
+{% endfor %}
+<hr />
+
+<h3>Vul:</h3>
+{% for vul in vuls %}
+<p>
+  {{vul.name}} type: <b>{{vul.type}}</b> level: {{vul.level}} time: {{vul.time}} sheet: {{vul.sheet_id}}
+</p>
+{% endfor %}
+<hr />
+
+<h3>Eve:</h3>
+{% for eve in eves %}
+<p>
+  {{eve.name}} type: <b>{{eve.type}}</b> level: {{eve.level}} time: {{eve.time}} sheet: {{eve.sheet_id}}
+</p>
+{% endfor %}
+
+{% endblock %}

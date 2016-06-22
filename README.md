@@ -1,18 +1,16 @@
-microblog
+Readme
 =========
 
-A decently featured microblogging web application written in Python and Flask that I'm developing in my Flask Mega-Tutorial series that begins [here](http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world).
+    monsec 企业安全月报系统，记录每月的安全漏洞、安全事件的信息和关键安全系统，通过报表形式展现方便量化工作，针对中小企业安全人力有限可以直接部署使用。
 
-Installation
-------------
+安装
+---------
 
-The tutorial referenced above explains how to setup a virtual environment with all the required modules. As a convenience, the `setup.py` script will create this virtual environment for you. You can run this script again to refresh any missing modules.
+    ./setup.py
 
-The sqlite database must also be created before the application can run, and the `db_create.py` script takes care of that. See the [Database tutorial](http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database) for the details.
+运行
+---------
 
-Running
--------
+    ./run.py
+    http://localhost:5000
 
-To run the application in the development web server just execute `run.py` with the Python interpreter from the flask virtual environment.
-
-# monsec

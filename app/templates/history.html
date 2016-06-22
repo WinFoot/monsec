@@ -1,0 +1,34 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{title}}</h1>
+
+
+{% for sheet in sheets %}
+
+    <p><h3><a href="/report/{{sheet.name}}"> {{sheet.name}} 安全月报 </a><h3> 风险指数: <b>{{sheet.level}}</b> </p>
+
+    <p>
+    <h3>漏洞列表:</h3>
+    <ol>
+    {% for vul in sheet.vuls %}
+        <li>{{vul.name}} type: <b>{{vul.type}}</b> level: {{vul.level}} time: {{vul.time}} sheet: {{vul.sheet_id}}</li>
+    {% endfor %}
+    </ol>
+    </p>
+
+    <p>
+    <h3>事件列表:</h3>
+    <ol>
+    {% for eve in sheet.eves %}
+        <li>{{eve.name}} type: <b>{{eve.type}}</b> level: {{eve.level}} time: {{eve.time}} sheet: {{eve.sheet_id}}</li>
+    {% endfor %}
+    </ol>
+    </p>
+
+    <hr />
+{% endfor %}
+
+
+{% endblock %}

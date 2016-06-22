@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{{title}} 安全月报</title>
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/carousel.css" rel="stylesheet">
+    <link href="/static/css/echartsHome.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation" id="head">
+        <a class="navbar-brand" >{{sheet.name}} 安全月报</a>
+        <div style="margin-top:15px;">
+         <a href="/index">首页</a> | 
+         <a href="/setting">设置</a> | 
+         <a href="/history">历史报表</a>
+        </div>
+    </div>
+	
+    <div class="container">
+        
+        <div class="row">
+            <div id="graphic" class="col-md-12">
+                <div class="row" style="margin-top:50px;">
+                    <div class="col-md-6">
+                        <div id="sec_risk" class="chart" style="height:340px"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="vul_history" class="chart" style="height:340px"></div>
+                    </div>
+                </div>
+<hr />
+                <div class="row" style="margin-top:50px;">
+                    <div class="col-md-6">
+                        <div id="sec_vul_count" class="chart" style="height:340px"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="sec_vul_type" class="chart" style="height:340px"></div>
+                    </div>
+                </div>
+<hr />
+                <div class="row" style="margin-top:50px;">
+                    <div class="col-md-12">
+                        <div id="sec_event" class="chart" style="height:400px"></div>
+                    </div>
+                </div>
+<hr />
+                <div class="row">
+                    <div style="text-align:center;height:100px;">
+                      <h2>安全中心关键系统</h2>
+                    </div>
+                    <div class="col-md-4">
+                        <div md="main" class="chart" style="text-align:center;height:350px">
+                        <img src="/static/img/elastic.png" height="70px" /><br />日志中心
+                        <font color="green">[正常]</font>
+                        <br /><br />
+                        <img src="/static/img/redmine.png" height="70px" /><br />漏洞跟踪
+                        <font color="green">[正常]</font>
+                        <br /><br />
+                        <img src="/static/img/arachni.png" height="70px" /><br />应用扫描器
+                        <font color="green">[正常]</font>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div md="main" class="chart" style="text-align:center;height:270px">
+                        <img src="/static/img/ossec.png" /><br />日志分析报警
+                        <font color="green">[正常]</font>
+                        <br /><br />
+                        <img src="/static/img/wiki.png" height="70px" /><br/>知识库
+                        <font color="green">[正常]</font>
+                        <br /><br />
+                        <img src="/static/img/openvas.png" height="70px" /><br/>漏洞扫描器
+                        <font color="green">[正常]</font>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div md="main" class="chart" style="text-align:center;height:270px">
+                        <img src="/static/img/freeipa.png" /><br />堡垒机
+                        <font color="green">[正常]</font>
+                        <br /><br />
+                        <img src="/static/img/scm.png" height="70px" /><br />代码管理
+                        <font color="green">[正常]</font>
+                        <br /><br />
+                        <img src="/static/img/access.png" height="70px" /><br />办公网准入
+                        <font color="green">[正常]</font>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/row-->
+
+        
+    </div><!--/.fluid-container-->
+
+    <footer id="footer"></footer>
+
+</body>
+<script src="/static/js/echarts.js"></script>
+<script type="text/javascript">
+
+require.config({ paths: { echarts: '/static/js' } });
+require( [
+    'echarts',
+    'echarts/chart/bar',
+    'echarts/chart/gauge',
+    'echarts/chart/pie',
+    'echarts/chart/line',
+    'echarts/chart/eventRiver',
+    'echarts/theme/infographic',
+    'echarts/chart/map' ],
+
+function (ec) {
+
+option_sec_risk = {
+    title : {
+        text: '安全风险指数', x:'center',
+        textStyle: { color: '#333', fontWeight: '' }
+    },
+    series : [ {
+            name:'安全风险',
+            type:'gauge', startAngle: 180,
+            endAngle: 0, center : ['50%', '70%'],
+            radius : 160,
+            axisLine: { lineStyle: { width: 80 } },
+            axisTick: { splitNumber: 20, length :12 },
+            axisLabel: {           
+                formatter: function(v){
+                    switch (v+''){
+                        case '10': return '低';
+                        case '50': return '中';
+                        case '90': return '高';
+                        default: return '';
+                    }
+                },
+                textStyle: { color: '#fff', fontSize: 15, fontWeight: 'bolder' }
+            },
+            pointer: { width:20, length: '90%', color: 'rgba(0, 255, 255, 0.8)' },
+            data:[{value: {{sheet.level}} }] } ]
+};
+var sec_risk = ec.init(document.getElementById('sec_risk'));
+sec_risk.setTheme('macarons');
+sec_risk.setOption(option_sec_risk);
+
+
+option_vul_history = {
+
+    title : { text: '安全漏洞趋势', x:'center', textStyle: { color: '#333', fontWeight: '' } },
+    tooltip : { trigger: 'axis' },
+    toolbox: { show : false,
+        feature : { mark : {show: true}, dataView : {show: true, readOnly: false},
+            magicType : {show: true, type: ['line', 'bar']}, restore : {show: true}, saveAsImage : {show: true}
+        } },
+    calculable : true,
+    xAxis : [ {
+            type : 'category',
+            //data : ['2015-10','2015-11','2015-12','2016-01','2016-02','2016-03','2016-04']
+            data : [{{','.join(vul_history_ret.keys())|safe}}]
+        } ],
+    yAxis : [ { type : 'value', splitArea : {show : true} } ],
+    series : [ {
+            name:'漏洞数量',
+            type:'bar',
+            //data:[0,33, 11, 9,3,3,0],
+            data : [{{",".join(vul_history_ret.values())}}],
+            itemStyle: { normal: { color: '#0080ff', label: { show: true } } },
+        } ]
+};
+var vul_history = ec.init(document.getElementById('vul_history'));
+vul_history.setTheme('infographic');
+vul_history.setOption(option_vul_history);
+
+
+option_vul_count = {
+	title : { text: '安全漏洞统计', x:'center', textStyle: { color: '#333', fontWeight: '' } },
+	tooltip : { trigger: 'item', formatter: "{a} <br/>{b} : {c} ({d}%)" },
+	toolbox: { show : false,
+		feature : { mark : {show: true}, dataView : {show: true, readOnly: false},
+			magicType : { show: true, type: ['pie', 'funnel'],
+			option: { funnel: { x: '25%', width: '50%', funnelAlign: 'left', max: 1548 } } },
+			restore : {show: true}, saveAsImage : {show: true}
+		}
+	}, calculable : true,
+	series : [ {
+		name:'漏洞数量',
+		type:'pie', radius : '55%', center: ['50%', '60%'],
+		data:[
+			//{value:2, name:'高危'},
+			//{value:1, name:'中危'},
+			//{value:0, name:'低危'},
+                        {{vul_count_ret|safe}}
+                ], 
+		itemStyle:{normal:{label:{show:true,formatter:'{b} : {c} ({d}%)'},labelLine :{show:true} } } 
+		} ]
+};
+var sec_vul_count = ec.init(document.getElementById('sec_vul_count'));
+sec_vul_count.setTheme('infographic');
+sec_vul_count.setOption(option_vul_count)
+
+option_vul_type = {
+    title : { 
+        text: '漏洞类型', x:'center',
+        textStyle: { color: '#333', fontWeight: '' }
+    },
+    tooltip : { trigger: 'axis' }, calculable : true,
+    xAxis : [ { type : 'value', boundaryGap : [0, 0.01] } ],
+    yAxis : [ {
+            type : 'category',
+            //data : ['未授权访问','SSH弱口令']
+            data : [{{','.join(vul_type_ret.keys())|safe}}]
+        } ],
+    series : [ {
+            name:'2016年', type:'bar',
+            //data:[2, 1]
+            data : [{{",".join(vul_type_ret.values())}}],
+        } ]
+};
+var sec_vul_type = ec.init(document.getElementById('sec_vul_type'));
+sec_vul_type.setOption(option_vul_type);
+			
+
+option_sec_event = {
+    title : {
+        text: '安全事件&应急响应', x:'center',
+        textStyle: { color: '#333', fontWeight: '' }
+    },
+    tooltip : { trigger: 'item', enterable: true },
+    toolbox: { show : false,
+    feature : { mark : {show: true}, restore : {show: true}, saveAsImage : {show: true} } },
+    xAxis : [ { type : 'time', boundaryGap: [0.05,0.1] } ],
+    series : [ {
+
+        "name": "事件", 
+        "type": "eventRiver", 
+        "data": [
+
+            //{ "name": "03-02 防火墙大量报警ICMP不可达", 
+            //    "evolution": [
+            //        { "time": "2016-03-02", "value": 10, }, 
+            //        { "time": "2016-03-12", "value": 10, },
+            //    ] },
+            //{ "name": "03-15 Struts2远程代码执行漏洞", 
+            //    "evolution": [
+            //        { "time": "2016-03-15", "value": 10, }, 
+            //        { "time": "2016-03-27", "value": 10, },
+            //    ] }
+            {{myevent_ret|safe}}
+        ] 
+
+    }]
+};
+var sec_event = ec.init(document.getElementById('sec_event'));
+sec_event.setTheme('macarons');
+sec_event.setOption(option_sec_event);
+
+
+
+});
+</script>
+</html>
