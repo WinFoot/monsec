@@ -4,3 +4,5 @@
 *.egg
 *.egg-info
 
+app.db
+flask
