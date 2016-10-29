@@ -38,4 +38,4 @@ monsec 企业安全月报系统
 
 截图
 ---------
-![alt tag](https://raw.githubusercontent.com/anjkz/monsec/master/img.png)
+![alt tag](https://raw.githubusercontent.com/anjkz/monsec/master/script/img.png)
