@@ -6,7 +6,7 @@ monsec 企业安全月报系统
 演示程序
 ---------
 
-    (http://monsec.0zu.net)
+    [monsec.0zu.net](http://monsec.0zu.net)
 
 使用说明
 ---------
@@ -30,12 +30,11 @@ monsec 企业安全月报系统
 
     如果运行中出现问题，请在github反馈。(https://github.com/anjkz/monsec/issues)
 
-```
+~~~
     # Ubuntu 在安装时报错，需要创建一个软连接
     # The "No module named _sysconfigdata_nd" is a bug in the Ubuntu package.
-
     $ sudo ln -s /usr/lib/python2.7/plat-*/_sysconfigdata_nd.py /usr/lib/python2.7/
-```
+~~~
 
 截图
 ---------
