@@ -4,16 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
-### Added
+## [Todo]
 - 订阅安全 exploitdb cve 等RSS
 - csosec.com csoer.com csohub.com csotool.com cisokit.com cso163.com
 - oschina发布产品
 - freebuf发布产品
 
-### Changed
-- Start versioning based on the current English version at 0.3.0 to help
-translation authors keep things up-to-date.
+## [Unreleased]
+### Added
+- 添加monsec开源许可和更新日志 ok
+- 在线上环境kvmla，搭建demo
+
+### Fixed
+- monsec修复启动bug
 
 ## [0.3.0] - 2015-12-03
 ### Added

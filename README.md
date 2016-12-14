@@ -6,7 +6,7 @@ monsec 企业安全月报系统
 演示程序
 ---------
 
-[monsec.0zu.net](http://monsec.0zu.net)
+[demo](http://monsec.0zu.net/report/2016-11)
 
 使用说明
 ---------
